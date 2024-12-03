@@ -19,6 +19,8 @@ RUN apt-get -y update && \
     apt-get -y --no-install-recommends install --fix-missing apt-utils build-essential git curl && \ 
     apt-get -y --no-install-recommends install --fix-missing pkg-config libonig-dev libcurl4 libcurl4-openssl-dev zip unzip openssl && \
     apt-get -y --no-install-recommends install locales && locale-gen C.UTF-8 && update-locale LANG=C.UTF-8 && \
+    apt-get -y --no-install-recommends install libxml2-dev && \
+    apt-get -y --no-install-recommends install libxslt-dev && \
     rm -rf /var/lib/apt/lists/* && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -44,6 +46,10 @@ RUN docker-php-ext-install curl && \
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-enable mysqli
 RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite
+RUN docker-php-ext-install soap
+RUN docker-php-ext-enable soap
+RUN docker-php-ext-install xsl
+RUN docker-php-ext-enable xsl
 
 # Install Freetype 
 RUN apt-get -y update && \
